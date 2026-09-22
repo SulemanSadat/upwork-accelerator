@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upwork Accelerator</title>
+    <style>
+        :root { --ink: #172033; --muted: #657085; --line: #e7ebf0; --brand: #108a00; --brand-dark: #0a6600; --brand-soft: #eef9ed; --surface: #ffffff; }
+        * { box-sizing: border-box; }
+        body { width: 344px; margin: 0; color: var(--ink); background: #f7f9fb; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+        body, body * { -webkit-user-select: none; user-select: none; cursor: pointer; }
+        .popup { padding: 16px; }
+        .panel { overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 12px 30px rgba(31, 42, 55, .08); }
+        .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 13px; }
+        .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .brand-mark { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; color: #fff; background: linear-gradient(135deg, #16a800, #087d00); border-radius: 10px; box-shadow: 0 5px 12px rgba(16, 138, 0, .22); }
+        .eyebrow { margin: 0 0 2px; color: #7c8798; font-size: 11px; font-weight: 800; letter-spacing: .11em; line-height: 1; }
+        h1 { margin: 0; font-size: 15px; font-weight: 750; letter-spacing: -.01em; line-height: 1.25; }
+        .status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 5px 8px; color: var(--brand-dark); background: var(--brand-soft); border: 1px solid #d6efd3; border-radius: 999px; font-size: 12px; font-weight: 750; line-height: 1; transition: color .18s ease, background-color .18s ease, border-color .18s ease; }
+        .status-pill::before { width: 6px; height: 6px; content: ""; background: currentColor; border-radius: 50%; box-shadow: 0 0 0 3px rgba(16, 138, 0, .11); }
+        .status-pill.is-paused { color: #9a5b05; background: #fff8e8; border-color: #f4dfb5; }
+        .summary { padding: 0 16px 16px; }
+        .summary p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+        .setting { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-top: 1px solid var(--line); }
+        .setting-copy { flex: 1; min-width: 0; }
+        .setting-title { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 13px; font-weight: 700; }
+        .setting-copy p { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+        .info { position: relative; display: inline-grid; width: 16px; height: 16px; place-items: center; color: #7b8798; border: 1px solid #b9c2ce; border-radius: 50%; cursor: pointer; font-size: 12px; font-style: normal; font-weight: 800; }
+        .info::after { position: absolute; z-index: 3; bottom: calc(100% + 8px); left: 50%; width: 176px; padding: 7px 8px; color: #fff; background: #202a3a; border-radius: 7px; box-shadow: 0 6px 16px rgba(22, 32, 51, .22); content: attr(data-tooltip); font-size: 12px; font-style: normal; font-weight: 500; line-height: 1.35; opacity: 0; pointer-events: none; transform: translate(-50%, 3px); transition: opacity .16s ease, transform .16s ease; }
+        .info:hover::after, .info:focus::after { opacity: 1; transform: translate(-50%, 0); }
+        .switch { position: relative; display: inline-block; width: 42px; height: 24px; flex: 0 0 auto; }
+        .switch input { width: 1px; height: 1px; opacity: 0; }
+        .slider { position: absolute; inset: 0; cursor: pointer; background: #c7ced8; border-radius: 99px; box-shadow: inset 0 0 0 1px rgba(20, 32, 51, .08); transition: background-color .2s ease, box-shadow .2s ease; }
+        .slider::before { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #fff; border-radius: 50%; box-shadow: 0 2px 4px rgba(20, 32, 51, .25); content: ""; transition: transform .2s cubic-bezier(.2, .9, .3, 1.2); }
+        input:checked + .slider { background: var(--brand); box-shadow: 0 0 0 3px rgba(16, 138, 0, .11); }
+        input:checked + .slider::before { transform: translateX(18px); }
+        input:focus-visible + .slider { outline: 3px solid rgba(31, 112, 255, .35); outline-offset: 3px; }
+        .how-it-works { padding: 13px 16px 14px; background: #fbfcfd; border-top: 1px solid var(--line); }
+        .how-it-works h2 { margin: 0 0 8px; color: #4e5a6b; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+        .steps { display: flex; gap: 7px; }
+        .step { display: flex; align-items: center; gap: 5px; color: #667287; font-size: 11px; line-height: 1.25; }
+        .step-number { display: grid; width: 17px; height: 17px; flex: 0 0 17px; place-items: center; color: var(--brand-dark); background: var(--brand-soft); border-radius: 50%; font-size: 11px; font-weight: 800; }
+        .quick-links { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 2px 0; color: #8a94a3; font-size: 12px; }
+        .quick-links a { color: #657085; font-weight: 650; text-decoration: none; }
+        .quick-links a:hover, .quick-links a:focus-visible { color: var(--brand-dark); text-decoration: underline; text-underline-offset: 2px; }
+        .footer { display: flex; align-items: center; justify-content: space-between; padding: 8px 2px 0; color: #7d8796; font-size: 12px; }
+        .popup-view[hidden] { display: none; }
+        .subpage-header { display: flex; align-items: center; gap: 10px; padding: 16px; border-bottom: 1px solid var(--line); }
+        .back-button { padding: 0; color: #657085; background: transparent; border: 0; cursor: pointer; font: inherit; font-size: 12px; font-weight: 700; }
+        .back-button:hover, .back-button:focus-visible { color: var(--brand-dark); text-decoration: underline; text-underline-offset: 2px; }
+        .subpage-header h1 { font-size: 14px; }
+        .subpage-content { padding: 14px 16px 16px; }
+        .about-name { margin: 0 0 4px; font-size: 14px; font-weight: 750; }
+        .about-description { margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+        .about-list, .settings-list { margin: 0; padding: 0; list-style: none; }
+        .about-list li, .settings-list li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+        .about-list span, .setting-row-label { display: block; color: #4e5a6b; font-size: 12px; font-weight: 700; }
+        .about-list strong, .setting-row-description, .setting-row-value { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; font-weight: 500; line-height: 1.4; }
+        .settings-list li:first-child { padding-top: 0; border-top: 0; }
+        .setting-row-copy { flex: 1; min-width: 0; }
+        .setting-row-value { margin: 0; color: #657085; font-weight: 650; white-space: nowrap; }
+        .settings-save-state { margin-top: 10px; font-size: 12px; }
+        .save-state { color: var(--brand-dark); font-weight: 650; opacity: 0; transition: opacity .18s ease; }
+        .save-state.is-visible { opacity: 1; }
+        body:not(.is-ready) .panel { opacity: .72; }
+        body:not(.is-ready) .switch { pointer-events: none; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+</head>
+<body>
+    <main class="popup">
+        <section class="popup-view" data-view="main" aria-label="Upwork Accelerator main view">
+            <section class="panel" aria-label="Upwork Accelerator controls">
+            <header class="header">
+                <div class="brand">
+                    <span class="brand-mark" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M13 2 4.7 13h6L10 22l9.3-12h-6L13 2Z" fill="currentColor" stroke="currentColor" stroke-linejoin="round"/></svg></span>
+                    <div><p class="eyebrow">JOB INTELLIGENCE</p><h1>Upwork Accelerator</h1></div>
+                </div>
+                <span class="status-pill" id="popupStatus">Active</span>
+            </header>
+            <div class="summary"><p>Surface client hire-rate signals directly on your Upwork job feed.</p></div>
+            <div class="setting" id="settings">
+                <div class="setting-copy">
+                    <p class="setting-title">Job feed insights <span class="info" tabindex="0" data-tooltip="Fetches the hire rate after you hover a job card for one second.">i</span></p>
+                    <p id="settingDescription">Hire-rate badges and job-card signals are on.</p>
+                </div>
+                <label class="switch" aria-label="Turn job feed insights on or off"><input type="checkbox" id="statusCheckbox" checked aria-describedby="settingDescription"><span class="slider" aria-hidden="true"></span></label>
+            </div>
+            <section class="how-it-works" aria-label="How it works"><h2>How it works</h2><div class="steps"><span class="step"><span class="step-number">1</span>Browse jobs</span><span class="step"><span class="step-number">2</span>Hover a card</span><span class="step"><span class="step-number">3</span>Review signal</span></div></section>
+            </section>
+            <nav class="quick-links" aria-label="Extension links"><a href="#about" data-view-link="about">About</a><span aria-hidden="true">•</span><a href="#settings" data-view-link="settings">Settings</a></nav>
+            <footer class="footer"><span class="save-state" id="saveState" role="status" aria-live="polite">Saved</span></footer>
+        </section>
+
+        <section class="popup-view" data-view="about" hidden aria-label="About Upwork Accelerator">
+            <section class="panel">
+                <header class="subpage-header"><button class="back-button" type="button" data-back>← Back</button><h1>About</h1></header>
+                <div class="subpage-content">
+                    <p class="about-name">Upwork Accelerator</p>
+                    <p class="about-description">Smart in-feed client hire-rate signals for freelancers.</p>
+                    <ul class="about-list">
+                        <li><span>Version<strong>1.0</strong></span></li>
+                        <li><span>Developer<strong>Suleman Sadat</strong></span></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+
+        <section class="popup-view" data-view="settings" hidden aria-label="Upwork Accelerator settings">
+            <section class="panel">
+                <header class="subpage-header"><button class="back-button" type="button" data-back>← Back</button><h1>Settings</h1></header>
+                <div class="subpage-content">
+                    <ul class="settings-list">
+                        <li><div class="setting-row-copy"><span class="setting-row-label">Analysis trigger</span><span class="setting-row-description">Client hire rate is checked after hovering a job card.</span></div><span class="setting-row-value">0.5 second</span></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script src="popup.js"></script>
+</body>
+</html>

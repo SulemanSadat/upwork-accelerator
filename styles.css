@@ -1,0 +1,144 @@
+/* In-feed client signals. Names are scoped to avoid inheriting Upwork component styles. */
+.accelerator-hire-badge,
+.accelerator-hire-loading,
+.accelerator-hire-unavailable {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 24px;
+    max-width: 100%;
+    margin: 8px 0 0 10px;
+    padding: 4px 8px;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: .005em;
+    line-height: 1.25 !important;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(20, 32, 51, .06);
+    transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease, border-color .16s ease;
+}
+
+.accelerator-hire-badge:hover,
+.accelerator-hire-unavailable:hover {
+    position: relative;
+    z-index: 2;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(20, 32, 51, .12);
+}
+
+.accelerator-hire-badge::before,
+.accelerator-hire-loading::before,
+.accelerator-hire-unavailable::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    content: "";
+    border-radius: 50%;
+}
+
+.badge-green { color: #087600 !important; background: #edf9eb !important; border-color: #ccebc7 !important; }
+.badge-green::before { background: #108a00; box-shadow: 0 0 0 3px rgba(16, 138, 0, .12); }
+.badge-red { color: #b3261e !important; background: #fff1f0 !important; border-color: #f3cac7 !important; }
+.badge-red::before { background: #d93025; box-shadow: 0 0 0 3px rgba(217, 48, 37, .10); }
+.badge-neutral { color: #38536b !important; background: #eff5f8 !important; border-color: #d5e3ea !important; }
+.badge-neutral::before { background: #54758d; box-shadow: 0 0 0 3px rgba(84, 117, 141, .10); }
+
+.accelerator-hire-loading { color: #546274 !important; background: #f6f8fa !important; border-color: #e3e8ee !important; }
+.accelerator-hire-loading::before { background: transparent; border: 1.5px solid #9aa7b7; border-right-color: transparent; animation: acceleratorSpin .7s linear infinite; }
+.accelerator-hire-unavailable { color: #6b5b3e !important; background: #fffaef !important; border-color: #eee0b7 !important; cursor: help; }
+.accelerator-hire-unavailable::before { background: #b88b29; box-shadow: 0 0 0 3px rgba(184, 139, 41, .10); }
+
+.accelerator-hire-badge[data-tooltip]::after,
+.accelerator-hire-unavailable[data-tooltip]::after {
+    position: absolute;
+    z-index: 2147483647;
+    bottom: calc(100% + 7px);
+    left: 50%;
+    width: max-content;
+    max-width: 220px;
+    padding: 7px 9px;
+    color: #fff;
+    background: #202a3a;
+    border-radius: 7px;
+    box-shadow: 0 8px 18px rgba(20, 32, 51, .2);
+    content: attr(data-tooltip);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity .16s ease, transform .16s ease;
+    white-space: normal;
+}
+
+.accelerator-hire-badge[data-tooltip]:hover::after,
+.accelerator-hire-unavailable[data-tooltip]:hover::after { opacity: 1; transform: translate(-50%, 0); }
+
+article.job-tile.accelerator-status-green,
+.up-card-section.accelerator-status-green,
+[data-test="job-tile"].accelerator-status-green {
+    border-left: 4px solid #14a800 !important;
+    background-color: rgba(20, 168, 0, .022) !important;
+    transition: border-color .18s ease, background-color .18s ease;
+}
+
+article.job-tile.accelerator-status-red,
+.up-card-section.accelerator-status-red,
+[data-test="job-tile"].accelerator-status-red {
+    border-left: 4px solid #d93025 !important;
+    background-color: rgba(217, 48, 37, .018) !important;
+    opacity: .76;
+    transition: border-color .18s ease, background-color .18s ease, opacity .18s ease;
+}
+
+article.job-tile.accelerator-status-neutral,
+.up-card-section.accelerator-status-neutral,
+[data-test="job-tile"].accelerator-status-neutral {
+    border-left: 4px solid #8ba2b3 !important;
+    background-color: rgba(84, 117, 141, .012) !important;
+    transition: border-color .18s ease, background-color .18s ease;
+}
+
+/* A pulse-only marker stays in the browser edge and never intercepts page input. */
+#accelerator-screen-indicator {
+    position: fixed;
+    top: 4px;
+    right: 4px;
+    left: auto;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    color: transparent;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .95);
+    border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(25, 41, 57, .2);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-size: 0 !important;
+    font-weight: 750 !important;
+    letter-spacing: .01em;
+    line-height: 1 !important;
+    pointer-events: none;
+    animation: acceleratorIndicatorIn .25s ease-out;
+}
+
+.inactive-indicator { border-color: rgba(255, 255, 255, .95) !important; }
+.pulse-dot, .off-dot { display: inline-block; width: 10px; height: 10px; margin: 0; border-radius: 50%; }
+.pulse-dot { background: #14a800; box-shadow: 0 0 0 0 rgba(20, 168, 0, .38); animation: indicatorPulse 1.8s infinite; }
+.off-dot { background: #b77916; }
+
+@keyframes acceleratorSpin { to { transform: rotate(360deg); } }
+@keyframes acceleratorIndicatorIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes indicatorPulse { 0% { box-shadow: 0 0 0 0 rgba(20, 168, 0, .38); } 70% { box-shadow: 0 0 0 5px rgba(20, 168, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(20, 168, 0, 0); } }
+
+@media (prefers-reduced-motion: reduce) { .accelerator-hire-badge, .accelerator-hire-loading, .accelerator-hire-unavailable, #accelerator-screen-indicator, .pulse-dot { animation: none !important; transition: none !important; } }
