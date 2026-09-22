@@ -4,6 +4,16 @@ Turn your Upwork job feed into a faster, data-driven workspace.
 
 Upwork Accelerator helps freelancers evaluate job opportunities quickly, reduce scrolling, and make more informed decisions before spending Connects.
 
+## ⚠️ Disclaimer & User Responsibility
+
+Upwork Accelerator is an **independent, third-party browser extension** and is not affiliated with or endorsed by Upwork.
+
+The extension has been designed with the intention of avoiding actions that may violate Upwork's policies, including automated bidding, messaging, clicking, or background activity. However, **no guarantee is made that its use complies with Upwork's current policies or that an account will not be restricted, suspended, or otherwise affected.**
+
+By using this extension, **you are solely responsible for your own use of the extension and any consequences that may result, including account limitations or suspension.**
+
+Please review Upwork's current Terms of Service and applicable policies before using the extension.
+
 ## Features
 
 * ⚡ Fast in-feed job insights
