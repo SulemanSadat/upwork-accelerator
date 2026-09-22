@@ -14,6 +14,8 @@ By using this extension, **you are solely responsible for your own use of the ex
 
 Please review Upwork's current Terms of Service and applicable policies before using the extension.
 
+<img width="3500" height="1966" alt="01" src="https://github.com/user-attachments/assets/34c25abf-c67d-4175-aa42-ad107d3af656" />
+
 ## Features
 
 * ⚡ Fast in-feed job insights
