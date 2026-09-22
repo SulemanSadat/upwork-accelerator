@@ -54,6 +54,10 @@ Processes relevant page information locally whenever possible and avoids unneces
 
 **Suleman Sadat**
 
+## ⭐ Support
+
+If you find this project interesting, consider giving the repository a star!
+
 ## License
 
 Copyright © 2026 Suleman Sadat. All rights reserved.
