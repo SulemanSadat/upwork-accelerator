@@ -1,6 +1,6 @@
 # 🚀 Upwork Accelerator — In-Feed Intelligence Pro
 
-Turn your Upwork job feed into a faster, data-driven workspace.
+Chrome extension that adds client hire rates and in-feed insights to Upwork job listings.
 
 Upwork Accelerator helps freelancers evaluate job opportunities quickly, reduce scrolling, and make more informed decisions before spending Connects.
 
