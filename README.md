@@ -56,4 +56,4 @@ Processes relevant page information locally whenever possible and avoids unneces
 
 ## License
 
-**MIT License**
+Copyright © 2026 Suleman Sadat. All rights reserved.
