@@ -14,7 +14,9 @@ By using this extension, **you are solely responsible for your own use of the ex
 
 Please review Upwork's current Terms of Service and applicable policies before using the extension.
 
-<img width="610" height="591" alt="02" src="https://github.com/user-attachments/assets/33a42ec8-f648-4db7-a5c4-1cd9b9df2c6d" />
+<img width="350" height="339" alt="02" src="https://github.com/user-attachments/assets/d7a50b90-8381-42e5-8747-7037fcd7cc6c" />
+
+<img width="1106" height="368" alt="03" src="https://github.com/user-attachments/assets/474ea3b0-955a-4bff-8ffb-a4f8885eef58" />
 
 ## Features
 
